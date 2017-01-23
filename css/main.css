@@ -34,4 +34,29 @@ img {
 .header {
   display: flex;
   flex-wrap: wrap;
+  justify-content: space-between;
+}
+
+.header__title {
+  text-align: right;
+}
+
+/* work */
+
+.work__projects {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+}
+
+.work__project {
+  width: 33%;
+  min-width: 250px;
+  padding-left: 10px;
+  padding-right: 10px;
+}
+
+.work__project__image {
+  width: 100%;
 }
