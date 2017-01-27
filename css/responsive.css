@@ -6,6 +6,12 @@
   }
 }
 
+@media screen and (max-width: 765px) {
+  .work__title {
+    text-align: center;
+  }
+}
+
 @media screen and (max-width: 250px) {
   .work__project {
     min-width: 100%;

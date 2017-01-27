@@ -4,8 +4,8 @@ var webserver = require('gulp-webserver');
 var uglify = require('gulp-uglify');
 var concatify = require('gulp-concat');
 var sourcemaps = require('gulp-sourcemaps');
-var imagemin = require('gulp-imagemin');
 var minifyhtml = require('gulp-minify-html');
+var responsive = require('gulp-responsive');
 
 // Paths to various files
 var paths = {
@@ -14,6 +14,7 @@ var paths = {
     images: ['image/**/*'],
     content: ['index.html']
 };
+
 
 // Compiles scss files and outputs them to build/css/*.css
 gulp.task('styles', function() {
@@ -45,9 +46,32 @@ gulp.task('content', function() {
 // Optimizes our image files and outputs them to build/image/*
 gulp.task('images', function() {
     return gulp.src(paths.images)
-        .pipe(imagemin({
-            optimizationLevel: 5
+        .pipe(responsive({
+            'hero.jpg': [
+                {
+                    width: 960,
+                    height: 450,
+                    rename: 'hero-large.jpg'
+                },
+                {
+                    width: 515,
+                    height: 465,
+                    rename: 'hero-small.jpg'
+                }
+            ],
+            'project-*.jpg': {
+                width: 250,
+                height: 250
+            }
+        },{
+            errorOnUnusedImage: false
         }))
+        .pipe(gulp.dest('./build/image/'));
+});
+
+// move svg images files since gulp-responsive doesn't support it
+gulp.task('move', function(){
+    return gulp.src('image/**/*.svg')
         .pipe(gulp.dest('./build/image/'));
 });
 
@@ -69,4 +93,4 @@ gulp.task('webserver', function() {
         }));
 });
 
-gulp.task('default', ['styles', 'scripts', 'content', 'images', 'watch', 'webserver']);
+gulp.task('default', ['move', 'styles', 'scripts', 'content', 'images', 'watch', 'webserver']);
