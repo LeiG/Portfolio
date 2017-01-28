@@ -9,10 +9,10 @@ var responsive = require('gulp-responsive');
 
 // Paths to various files
 var paths = {
-    scripts: ['js/*.js'],
-    styles: ['css/**/*.css'],
-    images: ['image/**/*'],
-    content: ['index.html']
+    scripts: ['source/js/*.js'],
+    styles: ['source/css/**/*.css'],
+    images: ['source/image/**/*'],
+    content: ['source/index.html']
 };
 
 
